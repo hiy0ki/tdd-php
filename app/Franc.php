@@ -2,10 +2,10 @@
 
 namespace App;
 
-class Franc
-{
-    private $amount;
+use App\Money;
 
+class Franc extends Money
+{
     public function __construct(int $amount)
     {
         $this->amount = $amount;
@@ -14,10 +14,5 @@ class Franc
     public function times(int $multiplier): Franc
     {
         return new self($this->amount * $multiplier);
-    }
-
-    public function equals(Franc $franc): bool
-    {
-        return $this->amount === $franc->amount;
     }
 }
