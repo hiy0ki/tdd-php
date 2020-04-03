@@ -6,7 +6,7 @@ use App\Dollar;
 use App\Franc;
 
 
-abstract class Money
+class Money
 {
     protected $amount;
     protected $currency;
@@ -20,7 +20,7 @@ abstract class Money
     public function equals(Money $money): bool
     {
         return $this->amount === $money->amount
-               && get_class($this) === get_class($money);
+               && $this->currency === $money->currency();
     }
 
     public function currency(): string
@@ -30,6 +30,7 @@ abstract class Money
 
     public function times(int $multiplier): Money
     {
+        return new Money($this->amount * $multiplier, $this->currency);
     }
 
     public static function dollar(int $amount): Money
