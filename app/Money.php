@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Money
+abstract class Money
 {
     protected $amount;
 
@@ -10,5 +10,9 @@ class Money
     {
         return $this->amount === $money->amount
                && get_class($this) === get_class($money);
+    }
+
+    public function times(int $multiplier): Money
+    {
     }
 }
