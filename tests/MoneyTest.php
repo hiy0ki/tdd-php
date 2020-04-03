@@ -3,8 +3,8 @@
 use PHPUnit\Framework\TestCase;
 
 use App\Money;
-use App\Dollar;
-use App\Franc;
+use App\Bank;
+
 
 class MoneyTest extends TestCase
 {
@@ -27,5 +27,12 @@ class MoneyTest extends TestCase
     {
         $this->assertSame("USD", Money::dollar(1)->currency());
         $this->assertSame("CHF", Money::franc(1)->currency());
+    }
+
+    public function test_simple_addition()
+    {
+        $sum = Money::dollar(5)->plus(Money::dollar(5));
+        $reduced = Bank::reduce($sum, "USD");
+        $this->assertTrue(Money::dollar(10)->equals($reduced));
     }
 }
